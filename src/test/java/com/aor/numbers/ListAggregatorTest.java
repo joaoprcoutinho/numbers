@@ -68,7 +68,7 @@ public class ListAggregatorTest {
         }
         ListAggregator aggregator = new ListAggregator();
         Stub deduplicator = new Stub();
-        int distinct = aggregator.distinct(list, deduplicator);
+        int distinct = aggregator.distinct(Arrays.asList(1, 2, 2, 4), deduplicator);
         Assertions.assertEquals(3, distinct);
     }
 
