@@ -52,10 +52,8 @@ public class ListAggregator {
      * Counts the number of distinct numbers in a list.
      * @return The number of distinct numbers.
      */
-    public int distinct(List<Integer> list) {
-        ListDeduplicator deduplicator = new ListDeduplicator();
-        List<Integer> distinct = deduplicator.deduplicate(list);
-
+    public int distinct(List<Integer> list, GenericListDeduplicator deduplicate) {
+        List<Integer> distinct = deduplicate.deduplicate(list);
         return distinct.size();
     }
 }

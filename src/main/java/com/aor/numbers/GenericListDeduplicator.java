@@ -1,5 +1,8 @@
 package com.aor.numbers;
 
+import java.util.List;
+
 public interface GenericListDeduplicator {
-    public void deduplicate();
+    public List<Integer> deduplicate(List<Integer> list);
+
 }

@@ -1,5 +1,6 @@
 package com.aor.numbers;
 
+import com.sun.tools.javac.jvm.Gen;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,9 +42,13 @@ public class ListAggregatorTest {
 
     @Test
     public void distinct() {
+        class Stub implements GenericListDeduplicator{
+            @Override public List<Integer> deduplicate(List<Integer> list) {
+                return  Arrays.asList(1, 2, 4, 5);}
+        }
         ListAggregator aggregator = new ListAggregator();
-        int distinct = aggregator.distinct(list);
-
+        Stub deduplicator = new Stub();
+        int distinct = aggregator.distinct(list, deduplicator);
         Assertions.assertEquals(4, distinct);
     }
     @Test
@@ -57,11 +62,13 @@ public class ListAggregatorTest {
     }
     @Test
     public void distinct_bug(){
-        List<Integer> test = Arrays.asList(1,2,4,2);
-
+        class Stub implements GenericListDeduplicator{
+            @Override public List<Integer> deduplicate(List<Integer> list) {
+                return  Arrays.asList(1, 2, 4);}
+        }
         ListAggregator aggregator = new ListAggregator();
-        int distinct = aggregator.distinct(list);
-
+        Stub deduplicator = new Stub();
+        int distinct = aggregator.distinct(list, deduplicator);
         Assertions.assertEquals(3, distinct);
     }
 
