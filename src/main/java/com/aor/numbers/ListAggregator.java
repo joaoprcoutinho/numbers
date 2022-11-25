@@ -13,7 +13,6 @@ public class ListAggregator {
      */
     public Integer sum(List<Integer> list) {
         int sum = 0;
-
         for (Integer number : list)
             sum += number;
 

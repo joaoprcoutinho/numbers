@@ -4,6 +4,7 @@ import com.sun.tools.javac.jvm.Gen;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,9 +12,15 @@ import java.util.List;
 
 public class ListAggregatorTest {
     List<Integer> list;
+    private  GenericListDeduplicator stubGenericListDeduplicator;
     @BeforeEach
-    public void helper(){
-        list = Arrays.asList(1,2,4,2,5);
+    public void helper() {
+        list = Arrays.asList(1, 2, 4, 2, 5);
+
+        stubGenericListDeduplicator = Mockito.mock(GenericListDeduplicator.class);
+        Mockito.when(stubGenericListDeduplicator.deduplicate(list)).thenReturn(Arrays.asList(1, 2, 4, 5));
+        Mockito.when(stubGenericListDeduplicator.deduplicate(Arrays.asList(1, 2, 2, 4))).thenReturn(Arrays.asList(1, 2, 4));
+
     }
 
     @Test
@@ -42,13 +49,8 @@ public class ListAggregatorTest {
 
     @Test
     public void distinct() {
-        class Stub implements GenericListDeduplicator{
-            @Override public List<Integer> deduplicate(List<Integer> list) {
-                return  Arrays.asList(1, 2, 4, 5);}
-        }
         ListAggregator aggregator = new ListAggregator();
-        Stub deduplicator = new Stub();
-        int distinct = aggregator.distinct(list, deduplicator);
+        int distinct = aggregator.distinct(list, stubGenericListDeduplicator);
         Assertions.assertEquals(4, distinct);
     }
     @Test
@@ -62,13 +64,8 @@ public class ListAggregatorTest {
     }
     @Test
     public void distinct_bug(){
-        class Stub implements GenericListDeduplicator{
-            @Override public List<Integer> deduplicate(List<Integer> list) {
-                return  Arrays.asList(1, 2, 4);}
-        }
         ListAggregator aggregator = new ListAggregator();
-        Stub deduplicator = new Stub();
-        int distinct = aggregator.distinct(Arrays.asList(1, 2, 2, 4), deduplicator);
+        int distinct = aggregator.distinct(Arrays.asList(1, 2, 2, 4), stubGenericListDeduplicator);
         Assertions.assertEquals(3, distinct);
     }
 
