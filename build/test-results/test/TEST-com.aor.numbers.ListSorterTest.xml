@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.aor.numbers.ListSorterTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-12-16T07:18:16" hostname="joaoprcoutinho" time="0.001">
+<testsuite name="com.aor.numbers.ListSorterTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-12-16T07:44:33" hostname="joaoprcoutinho" time="0.001">
   <properties/>
   <testcase name="sort()" classname="com.aor.numbers.ListSorterTest" time="0.0"/>
   <testcase name="sort_bug()" classname="com.aor.numbers.ListSorterTest" time="0.0"/>

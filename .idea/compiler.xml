@@ -4,6 +4,8 @@
     <bytecodeTargetLevel target="1.8">
       <module name="numbers.src.test.groovy.main" target="11" />
       <module name="numbers.src.test.groovy.test" target="11" />
+      <module name="numbers.src.test.untitled" target="11" />
+      <module name="numbers.src.test.untitled.main" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
